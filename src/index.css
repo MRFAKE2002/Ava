@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+  --color-teal-light: #00b5ab;
+  --color-teal-primary: #00b5a0;
+  --color-teal-dark: #02816E;
+}
+
+:root {
+  direction: rtl;
+}
