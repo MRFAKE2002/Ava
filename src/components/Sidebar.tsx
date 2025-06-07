@@ -3,25 +3,46 @@ import React from "react";
 
 function Sidebar() {
   return (
-    <section className="relative w-[166px] min-h-screen rounded-l-[10px] bg-gradient-to-b from-teal-primary to-teal-light">
-      <img
-        src="/alefba-group.svg"
-        alt="background"
-        className="absolute inset-0 w-full h-full object-cover"
+    <aside className="fixed right-0 top-0 w-[166px] h-screen bg-gradient-to-b from-teal-primary to-teal-light rounded-l-[10px] overflow-hidden">
+      {/* تصویر پس‌زمینه */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url('/alefba-group.svg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
       />
-      <div className="flex justify-center relative top-12">
-        <img src="/ava-icon.svg" alt="" />
-        <h1 className="text-2xl mx-4 text-white">آوا</h1>
+
+      {/* محتوای Sidebar */}
+      <div className="relative h-full flex flex-col">
+        {/* لوگو و نام */}
+        <div className="flex items-center justify-center pt-12 mb-8">
+          <img src="/ava-icon.svg" alt="آوا" className="w-8 h-8" />
+          <h1 className="text-2xl text-white font-bold mr-4">آوا</h1>
+        </div>
+
+        {/* منوها */}
+        <nav className="flex-1 px-2 mt-36">
+          {/* دکمه تبدیل گفتار */}
+          <div className="mb-12">
+            <button className="w-full flex items-center justify-center bg-teal-dark rounded-xl py-3 px-4 text-white hover:bg-opacity-80 transition-colors cursor-pointer">
+              <img src="/speech-icon.svg" alt="" className="w-5 h-5" />
+              <span className="text-lg mr-3">تبدیل گفتار</span>
+            </button>
+          </div>
+
+          {/* دکمه آرشیو */}
+          <div className="mb-6">
+            <button className="w-full flex items-center justify-center bg-teal-dark rounded-xl py-3 px-4 text-white hover:bg-opacity-80 transition-colors cursor-pointer">
+              <img src="/archive-icon.svg" alt="" className="w-5 h-5" />
+              <span className="text-lg mr-6">آرشیو</span>
+            </button>
+          </div>
+        </nav>
       </div>
-      <div className="flex justify-center w-[150px] rounded-xl bg-teal-dark relative top-[270px] py-2 mx-auto">
-        <img src="/speech-icon.svg" alt="" />
-        <h2 className="text-white text-xl mx-3">تبدیل گفتار</h2>
-      </div>
-      <div className="flex justify-center w-[150px] rounded-xl bg-teal-dark relative top-[345px] py-2 mx-auto">
-        <img src="/archive-icon.svg" alt="" />
-        <h2 className="text-white text-xl mx-6">آرشیو</h2>
-      </div>
-    </section>
+    </aside>
   );
 }
 
