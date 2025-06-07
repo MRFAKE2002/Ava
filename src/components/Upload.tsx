@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 //! Components
-import RecordTab from "./RecordTab";
-import UploadTab from "./FileTab";
-import TextTab from "./LinkTab";
+import RecordTab from "./UploadTabs/RecordTab";
+import UploadTab from "./UploadTabs/FileTab";
+import TextTab from "./UploadTabs/LinkTab";
 
 function Upload() {
   const [activeTab, setActiveTab] = useState("record");
