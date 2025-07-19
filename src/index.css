@@ -6,8 +6,10 @@
   --color-teal-primary: #00b5a0;
   --color-teal-dark: #02816e;
   --color-gray-light: #969696;
+  --color-gray-primary: #8f8f8f;
   --color-blue-primary: #118ad3;
   --color-red-primary: #ff1654;
+  --color-red-trash: #dc3545;
 }
 
 :root {
