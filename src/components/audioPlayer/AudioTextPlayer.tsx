@@ -463,7 +463,7 @@ function AudioTextPlayer({
       <>
         {text.substring(0, segmentIndex)}
         <span
-          className={`${themeColors.accent} ${themeColors.text} px-2 py-1 rounded-md font-medium animate-pulse`}
+          className={`${themeColors.accent} ${themeColors.text} px-2 py-1 rounded-md font-medium animate-pulse `}
         >
           {segmentText}
         </span>
@@ -503,7 +503,7 @@ function AudioTextPlayer({
       )}
 
       {/* Content */}
-      <div className="p-6 px-10">
+      <div className="pt-6 px-10">
         {/* Buttons */}
         <div className="flex items-center justify-between border-b border-gray-300 overflow-hidden mb-3">
           {/* Text & Text With Time */}
@@ -565,17 +565,17 @@ function AudioTextPlayer({
         </div>
 
         {/* Text Content */}
-        <div className="h-52">
+        <div className="h-60 overflow-hidden">
           {textMode === "simple" ? (
             /* Text */
-            <div className="p-4 max-h-96 overflow-y-auto">
-              <div className="leading-relaxed text-base">
+            <div className="p-4 pb-0 max-h-58 overflow-y-auto">
+              <div className="leading-relaxed text-base overflow-y-auto">
                 {highlightCurrentText(fullText)}
               </div>
             </div>
           ) : (
             /* Text With Time */
-            <div className="space-y-3 max-h-96 overflow-y-auto">
+            <div className="space-y-3 max-h-58 overflow-y-auto">
               {processedSegments.map((segment, index) => (
                 <div
                   key={index}
@@ -673,7 +673,9 @@ function AudioTextPlayer({
           </div>
 
           {/* نوار پیشرفت */}
-          <div className="flex-1 flex items-center gap-3">
+          <div className="flex-1 flex items-center gap-3" 
+                style={{ direction: "ltr" }}
+                >
             <span className="text-sm text-gray-500 min-w-12">
               {formatTime(currentTime)}
             </span>
