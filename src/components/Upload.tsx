@@ -1,5 +1,5 @@
 //! Libraries
-import React, { useState } from "react";
+import { useState } from "react";
 
 //! Icons
 import { HiOutlineMicrophone } from "react-icons/hi";
@@ -14,8 +14,6 @@ import TextTab from "./UploadTabs/LinkTab";
 function Upload() {
   //! States
   const [activeTab, setActiveTab] = useState("record");
-  const [isRecording, setIsRecording] = useState(false);
-  const [recordedText, setRecordedText] = useState("");
 
   //! JSX
 
