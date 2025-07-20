@@ -1,15 +1,19 @@
 //! Libraries
 import React, { useState, useRef, useEffect } from "react";
+
+//! Icons
 import { FaUser, FaSignOutAlt } from "react-icons/fa";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa6";
 
+//! Types
 interface UserDropDownProps {}
 
 const UserDropdown: React.FC<UserDropDownProps> = () => {
+  //! States
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // بستن dropdown وقتی خارج کلیک شود
+  //! UseEffect
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -33,8 +37,9 @@ const UserDropdown: React.FC<UserDropDownProps> = () => {
   const handleLogout = (): void => {
     console.log("خروج از حساب کاربری");
     setIsOpen(false);
-    // اینجا منطق خروج از حساب کاربری
   };
+
+  //! JSX
 
   return (
     <div
