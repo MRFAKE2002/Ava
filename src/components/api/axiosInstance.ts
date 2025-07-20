@@ -6,7 +6,7 @@ const axiosAPIInstance = axios.create({
     "Content-Type": "application/json",
     Authorization: "Token a85d08400c622b50b18b61e239b9903645297196",
   },
-  timeout: 10000,
+  timeout: 50000,
 });
 
 export default axiosAPIInstance;
