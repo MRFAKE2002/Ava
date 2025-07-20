@@ -1,15 +1,23 @@
 //! Libraries
 import React, { useState } from "react";
 
+//! Icons
+import { HiOutlineMicrophone } from "react-icons/hi";
+import { WiCloudUp } from "react-icons/wi";
+import { FiLink } from "react-icons/fi";
+
 //! Components
 import RecordTab from "./UploadTabs/RecordTab";
 import UploadTab from "./UploadTabs/FileTab";
 import TextTab from "./UploadTabs/LinkTab";
 
 function Upload() {
+  //! States
   const [activeTab, setActiveTab] = useState("record");
   const [isRecording, setIsRecording] = useState(false);
   const [recordedText, setRecordedText] = useState("");
+
+  //! JSX
 
   return (
     <div
@@ -35,15 +43,14 @@ function Upload() {
           }`}
         >
           <div className="flex items-center">
-            <img
-              src="/mic-icon.svg"
-              alt="microphone"
+            <HiOutlineMicrophone
               className={`w-5 h-5 transition-all ${
                 activeTab === "record"
                   ? "filter invert brightness-0 saturate-100"
                   : "filter grayscale group-hover:invert group-hover:brightness-0"
               }`}
             />
+
             <h2 className="mr-2 text-lg">ضبط صدا</h2>
           </div>
         </button>
@@ -51,22 +58,21 @@ function Upload() {
         {/* دکمه بارگزاری فایل */}
         <button
           onClick={() => setActiveTab("file")}
-          className={`px-6 py-3 rounded-t-lg font-medium transition-all group ${
+          className={`px-3 py-2 rounded-t-lg font-medium transition-all group ${
             activeTab === "file"
               ? "bg-blue-primary text-white"
               : "bg-transparent text-gray-500 hover:bg-blue-primary hover:text-white"
           }`}
         >
           <div className="flex items-center">
-            <img
-              src="/upload-icon.svg"
-              alt="upload"
-              className={`w-5 h-5 transition-all ${
+            <WiCloudUp
+              className={`w-8 h-8 transition-all ${
                 activeTab === "file"
                   ? "filter invert brightness-0 saturate-100"
                   : "filter grayscale group-hover:invert group-hover:brightness-0"
               }`}
             />
+
             <h2 className="mr-2 text-lg">بارگزاری فایل</h2>
           </div>
         </button>
@@ -81,15 +87,14 @@ function Upload() {
           }`}
         >
           <div className="flex items-center">
-            <img
-              src="/chain-icon.svg"
-              alt="link"
+            <FiLink
               className={`w-5 h-5 transition-all ${
                 activeTab === "link"
                   ? "filter invert brightness-0 saturate-100"
                   : "filter grayscale group-hover:invert group-hover:brightness-0"
               }`}
             />
+
             <h2 className="mr-2 text-lg">لینک</h2>
           </div>
         </button>
