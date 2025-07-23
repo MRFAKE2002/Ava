@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import {
   setFileTextMode,
   setFileCurrentTime,
-  setFileCopySuccess,
+  // setFileCopySuccess,
   selectFileState,
 } from "../../store/slices/archiveSlice";
 

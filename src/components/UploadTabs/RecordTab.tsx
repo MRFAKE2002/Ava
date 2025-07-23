@@ -134,6 +134,8 @@ function RecordTab() {
 
   //  ارسال صدا به API (پارامتر اختیاری)
   const sendAudioToApi = async (blob?: Blob, localUrl?: string) => {
+    console.log(localUrl);
+
     const targetBlob = blob || audioBlob;
     // const targetLocalUrl = localUrl || recordedAudio;
 
