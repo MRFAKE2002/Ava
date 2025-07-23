@@ -16,15 +16,15 @@ function FileTab() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [transcriptionData, setTranscriptionData] =
-    useState<ITranscriptionData | null>(null); // ✅ داده‌های API
-  const [showResult, setShowResult] = useState(false); // ✅ نمایش نتیجه
-  const [originalFileUrl, setOriginalFileUrl] = useState<string>(""); // ✅ URL فایل محلی
+    useState<ITranscriptionData | null>(null); 
+  const [showResult, setShowResult] = useState(false);
+  const [originalFileUrl, setOriginalFileUrl] = useState<string>("");
 
-  // ✅ آپلود به سرویس خارجی (مثل RecordTab)
+  //! Upload For public Url
   const uploadToPublicUrl = async (file: File): Promise<string> => {
-    // سرویس tmpfiles.org
+    // tmpfiles.org
     try {
-      console.log("🔄 تست tmpfiles.org...");
+      console.log("تست tmpfiles.org...");
       const formData = new FormData();
       formData.append("file", file);
 
@@ -40,7 +40,7 @@ function FileTab() {
             "tmpfiles.org/",
             "tmpfiles.org/dl/"
           );
-          console.log("✅ tmpfiles.org موفق:", url);
+          console.log(" tmpfiles.org موفق:", url);
           return url;
         }
       }
@@ -51,18 +51,18 @@ function FileTab() {
     throw new Error("امکان آپلود فایل وجود ندارد");
   };
 
-  // ✅ ارسال فایل به API
+  //  ارسال فایل به API
   const sendFileToAPI = async (file: File, localUrl: string) => {
     try {
       setLoading(true);
       setError("");
 
-      console.log("🔄 آپلود فایل...");
+      console.log("آپلود فایل...");
 
       // آپلود و گرفتن URL
       const publicUrl = await uploadToPublicUrl(file);
 
-      console.log("✅ URL دریافت شد:", publicUrl);
+      console.log(" URL دریافت شد:", publicUrl);
       console.log("📤 ارسال به API...");
 
       // ارسال URL به API
@@ -70,16 +70,16 @@ function FileTab() {
         media_urls: [publicUrl],
       });
 
-      console.log("✅ پاسخ API:", response.data);
+      console.log(" پاسخ API:", response.data);
 
-      // ✅ ذخیره پاسخ و نمایش نتیجه
+      //  ذخیره پاسخ و نمایش نتیجه
       if (
         response.data &&
         Array.isArray(response.data) &&
         response.data.length > 0
       ) {
         setTranscriptionData(response.data[0]);
-        setOriginalFileUrl(localUrl); // ✅ URL محلی برای پخش
+        setOriginalFileUrl(localUrl); //  URL محلی برای پخش
         setShowResult(true);
       }
     } catch (error: any) {
@@ -99,7 +99,7 @@ function FileTab() {
     }
   };
 
-  // ✅ Effect برای ارسال خودکار
+  //  Effect برای ارسال خودکار
   useEffect(() => {
     if (selectedFile) {
       const fileUrl = URL.createObjectURL(selectedFile);
@@ -107,7 +107,7 @@ function FileTab() {
     }
   }, [selectedFile]);
 
-  // ✅ ریست کردن فایل (برای شروع مجدد)
+  //  ریست کردن فایل (برای شروع مجدد)
   const resetFile = () => {
     setSelectedFile(null);
     setError("");
@@ -159,15 +159,15 @@ function FileTab() {
     return (bytes / (1024 * 1024)).toFixed(2) + " MB";
   };
 
-  // ✅ اگه نتیجه نمایش داده شده، فقط AudioTextPlayer نشون بده
+  //  اگه نتیجه نمایش داده شده، فقط AudioTextPlayer نشون بده
   if (showResult && transcriptionData) {
     return (
       <div className="w-full h-full">
         <AudioTextPlayer
           transcriptionData={transcriptionData}
           originalAudioUrl={originalFileUrl}
-          onNewRecording={resetFile} // ✅ callback برای انتخاب فایل جدید
-          theme="file" // ✅ تم آبی برای FileTab
+          onNewRecording={resetFile} //  callback برای انتخاب فایل جدید
+          theme="file" //  تم آبی برای FileTab
         />
       </div>
     );
@@ -186,9 +186,7 @@ function FileTab() {
             />
             <p className="text-lg mt-5 text-center">
               {loading ? (
-                <span className="text-lg">
-                  🔄 در حال پردازش و تبدیل به متن...
-                </span>
+                <span className="text-lg">در حال پردازش و تبدیل به متن...</span>
               ) : (
                 <>
                   برای بارگذاری فایل گفتاری (صوتی/تصویری)، دکمه را فشار دهید
@@ -215,7 +213,7 @@ function FileTab() {
               onClick={resetFile}
               className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
             >
-              🔄 تلاش مجدد
+              تلاش مجدد
             </button>
           </div>
         )}

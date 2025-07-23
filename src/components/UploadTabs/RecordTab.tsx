@@ -29,7 +29,7 @@ function RecordTab() {
   const streamRef = useRef<MediaStream | null>(null);
   const timerRef = useRef<number>(0);
 
-  // ✅ شروع ضبط صدا
+  //  شروع ضبط صدا
   const startRecording = async () => {
     try {
       // ریست کردن state های قبلی
@@ -49,7 +49,7 @@ function RecordTab() {
         audioChunks.push(event.data);
       };
 
-      // ✅ بعد از توقف ضبط، مستقیماً API بزن
+      //  بعد از توقف ضبط، مستقیماً API بزن
       mediaRecorder.onstop = async () => {
         const blob = new Blob(audioChunks, { type: "audio/wav" });
         const audioUrl = URL.createObjectURL(blob);
@@ -57,7 +57,7 @@ function RecordTab() {
         setRecordedAudio(audioUrl);
         setAudioBlob(blob);
 
-        // ✅ مستقیماً ارسال به API
+        //  مستقیماً ارسال به API
         await sendAudioToApi(blob, audioUrl);
       };
 
@@ -73,7 +73,7 @@ function RecordTab() {
     }
   };
 
-  // ✅ توقف ضبط
+  //  توقف ضبط
   const stopRecording = () => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop(); // این خودش mediaRecorder.onstop رو فراخوانی می‌کنه
@@ -89,7 +89,7 @@ function RecordTab() {
     }
   };
 
-  // ✅ ریست کردن ضبط (برای شروع مجدد)
+  //  ریست کردن ضبط (برای شروع مجدد)
   const resetRecording = () => {
     setRecordedAudio("");
     setAudioBlob(null);
@@ -100,12 +100,12 @@ function RecordTab() {
     setLoading(false);
   };
 
-  // ✅ آپلود به سرویس‌های مختلف
+  //  آپلود به سرویس‌های مختلف
   const uploadToPublicUrl = async (blob: Blob): Promise<string> => {
     const file = new File([blob], "recorded.mp3", { type: "audio/mp3" });
 
     try {
-      console.log("🔄 آپلود به tmpfiles.org...");
+      console.log("آپلود به tmpfiles.org...");
       const formData = new FormData();
       formData.append("file", file);
 
@@ -121,7 +121,7 @@ function RecordTab() {
             "tmpfiles.org/",
             "tmpfiles.org/dl/"
           );
-          console.log("✅ آپلود موفق:", url);
+          console.log(" آپلود موفق:", url);
           return url;
         }
       }
@@ -132,7 +132,7 @@ function RecordTab() {
     throw new Error("امکان آپلود فایل وجود ندارد");
   };
 
-  // ✅ ارسال صدا به API (پارامتر اختیاری)
+  //  ارسال صدا به API (پارامتر اختیاری)
   const sendAudioToApi = async (blob?: Blob, localUrl?: string) => {
     const targetBlob = blob || audioBlob;
     const targetLocalUrl = localUrl || recordedAudio;
@@ -146,12 +146,12 @@ function RecordTab() {
       setLoading(true);
       setError("");
 
-      console.log("🔄 شروع پردازش...");
+      console.log("شروع پردازش...");
 
       // آپلود و گرفتن URL خارجی
       const publicUrl = await uploadToPublicUrl(targetBlob);
 
-      console.log("✅ URL دریافت شد:", publicUrl);
+      console.log(" URL دریافت شد:", publicUrl);
       console.log("📤 ارسال به API...");
 
       // ارسال URL به API
@@ -159,9 +159,9 @@ function RecordTab() {
         media_urls: [publicUrl],
       });
 
-      console.log("✅ پاسخ API:", response.data);
+      console.log(" پاسخ API:", response.data);
 
-      // ✅ ذخیره پاسخ و نمایش نتیجه
+      //  ذخیره پاسخ و نمایش نتیجه
       if (
         response.data &&
         Array.isArray(response.data) &&
@@ -187,21 +187,21 @@ function RecordTab() {
     }
   };
 
-  // ✅ فرمت زمان
+  //  فرمت زمان
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
-  // ✅ اگه نتیجه نمایش داده شده، فقط AudioTextPlayer نشون بده
+  //  اگه نتیجه نمایش داده شده، فقط AudioTextPlayer نشون بده
   if (showResult && transcriptionData) {
     return (
       <div className="w-full absolute top-0">
         <AudioTextPlayer
           transcriptionData={transcriptionData}
           originalAudioUrl={recordedAudio}
-          onNewRecording={resetRecording} // ✅ callback برای شروع ضبط جدید
+          onNewRecording={resetRecording} //  callback برای شروع ضبط جدید
           theme="record" // یا "file" یا "link"
         />
       </div>
@@ -236,7 +236,7 @@ function RecordTab() {
         <div className="px-6 py-4">
           <div className="flex items-center justify-center space-x-3">
             <div className="animate-spin rounded-full h-6 w-6"></div>
-            <span className="text-lg">🔄 در حال پردازش و تبدیل به متن...</span>
+            <span className="text-lg">در حال پردازش و تبدیل به متن...</span>
           </div>
         </div>
       )}
@@ -258,13 +258,13 @@ function RecordTab() {
 
       {/* نمایش خطا */}
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg max-w-md text-center">
+        <div className="fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg max-w-md text-center">
           <p className="mb-2">❌ {error}</p>
           <button
             onClick={resetRecording}
             className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
           >
-            🔄 تلاش مجدد
+            تلاش مجدد
           </button>
         </div>
       )}
