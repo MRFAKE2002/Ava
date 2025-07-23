@@ -20,7 +20,7 @@ function LinkTab() {
   const [showResult, setShowResult] = useState(false);
   const [originalAudioUrl, setOriginalAudioUrl] = useState<string>("");
 
-  // ✅ ارسال لینک به API
+  //  ارسال لینک به API
   const sendLinkToAPI = async (linkUrl: string) => {
     try {
       setLoading(true);
@@ -28,16 +28,16 @@ function LinkTab() {
 
       console.log("📤 ارسال لینک به API:", linkUrl);
 
-      // ✅ ذخیره URL اصلی برای پخش
+      //  ذخیره URL اصلی برای پخش
       setOriginalAudioUrl(linkUrl);
 
       const response = await axiosAPIInstance.post("/transcribe_files/", {
         media_urls: [linkUrl],
       });
 
-      console.log("✅ پاسخ API:", response.data);
+      console.log(" پاسخ API:", response.data);
 
-      // ✅ ذخیره پاسخ و نمایش نتیجه
+      //  ذخیره پاسخ و نمایش نتیجه
       if (
         response.data &&
         Array.isArray(response.data) &&
@@ -61,7 +61,7 @@ function LinkTab() {
     }
   };
 
-  // ✅ ریست کردن فرم
+  //  ریست کردن فرم
   const resetLink = () => {
     setUrl("");
     setError("");
@@ -113,7 +113,7 @@ function LinkTab() {
     await sendLinkToAPI(url);
   };
 
-  // ✅ اگه نتیجه نمایش داده شده، فقط AudioTextPlayer نشون بده
+  //  اگه نتیجه نمایش داده شده، فقط AudioTextPlayer نشون بده
   if (showResult && transcriptionData) {
     return (
       <div className="w-full h-full">
@@ -121,7 +121,7 @@ function LinkTab() {
           transcriptionData={transcriptionData}
           originalAudioUrl={originalAudioUrl}
           onNewRecording={resetLink}
-          theme="link" // ✅ تم قرمز
+          theme="link" //  تم قرمز
         />
       </div>
     );
@@ -132,9 +132,11 @@ function LinkTab() {
       {/* فرم */}
       <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
         <div className="relative">
-          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-red-primary rounded-full w-10 h-10 flex justify-center items-center">
+          <button className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-red-primary rounded-full w-10 h-10 flex justify-center items-center cursor-pointer"
+          type="submit"
+          >
             <FiLink className="w-4 h-4 text-white" />
-          </div>
+          </button>
 
           <input
             type="url"
@@ -148,7 +150,7 @@ function LinkTab() {
           />
         </div>
 
-        {/* دکمه ارسال */}
+        {/* دکمه ارسال
         <button
           type="submit"
           disabled={loading || !url.trim()}
@@ -160,9 +162,9 @@ function LinkTab() {
               <span>در حال ارسال...</span>
             </span>
           ) : (
-            "🎯 تبدیل به متن"
+            "تبدیل به متن"
           )}
-        </button>
+        </button> */}
       </form>
 
       {/* راهنما */}
@@ -171,30 +173,17 @@ function LinkTab() {
           نشانی اینترنتی فایل حاوی گفتار (صوتی/تصویری) را وارد
           <br />و دکمه را فشار دهید
         </p>
-        <p className="text-sm text-gray-500">
-          فرمت‌های پشتیبانی شده: MP3, WAV, MP4, M4A, FLAC
-        </p>
       </div>
-
-      {/* نمایش وضعیت پردازش */}
-      {loading && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg">
-          <div className="flex items-center justify-center space-x-3">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-700"></div>
-            <span className="text-lg">🔄 در حال پردازش و تبدیل به متن...</span>
-          </div>
-        </div>
-      )}
 
       {/* نمایش خطا */}
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-center max-w-md">
+        <div className="fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-center max-w-md">
           <p className="mb-2">❌ {error}</p>
           <button
             onClick={resetLink}
             className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
           >
-            🔄 تلاش مجدد
+            تلاش مجدد
           </button>
         </div>
       )}
