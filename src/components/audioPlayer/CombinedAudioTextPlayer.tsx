@@ -33,7 +33,7 @@ function CombinedAudioTextPlayer({
   originalText,
   timedText = [],
   audioUrl,
-  duration,
+  // duration,
 }: ICombinedAudioTextPlayerProps) {
   const dispatch = useAppDispatch();
 
@@ -90,29 +90,29 @@ function CombinedAudioTextPlayer({
   };
 
   // ✅ کپی متن (از Redux)
-  const handleCopyText = async () => {
-    const textToCopy =
-      textMode === "simple"
-        ? originalText || ""
-        : timedText
-            .map(
-              (segment, index) =>
-                `${index + 1}. [${formatTime(segment.startTime)} - ${formatTime(
-                  segment.endTime
-                )}] ${segment.text}`
-            )
-            .join("\n\n");
+  // const handleCopyText = async () => {
+  //   const textToCopy =
+  //     textMode === "simple"
+  //       ? originalText || ""
+  //       : timedText
+  //           .map(
+  //             (segment, index) =>
+  //               `${index + 1}. [${formatTime(segment.startTime)} - ${formatTime(
+  //                 segment.endTime
+  //               )}] ${segment.text}`
+  //           )
+  //           .join("\n\n");
 
-    try {
-      await navigator.clipboard.writeText(textToCopy);
-      dispatch(setFileCopySuccess({ fileId, success: true }));
-      setTimeout(() => {
-        dispatch(setFileCopySuccess({ fileId, success: false }));
-      }, 2000);
-    } catch (error) {
-      console.error("خطا در کپی:", error);
-    }
-  };
+  //   try {
+  //     await navigator.clipboard.writeText(textToCopy);
+  //     dispatch(setFileCopySuccess({ fileId, success: true }));
+  //     setTimeout(() => {
+  //       dispatch(setFileCopySuccess({ fileId, success: false }));
+  //     }, 2000);
+  //   } catch (error) {
+  //     console.error("خطا در کپی:", error);
+  //   }
+  // };
 
   // Audio controls
   const togglePlay = () => {

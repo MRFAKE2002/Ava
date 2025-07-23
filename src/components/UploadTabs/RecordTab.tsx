@@ -1,5 +1,5 @@
 //! Libraries
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 //! Icons
 import { HiOutlineMicrophone } from "react-icons/hi";
@@ -135,7 +135,7 @@ function RecordTab() {
   //  ارسال صدا به API (پارامتر اختیاری)
   const sendAudioToApi = async (blob?: Blob, localUrl?: string) => {
     const targetBlob = blob || audioBlob;
-    const targetLocalUrl = localUrl || recordedAudio;
+    // const targetLocalUrl = localUrl || recordedAudio;
 
     if (!targetBlob) {
       setError("هیچ فایل صوتی برای ارسال وجود ندارد");

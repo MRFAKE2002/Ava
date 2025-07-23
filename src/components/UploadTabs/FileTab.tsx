@@ -155,9 +155,9 @@ function FileTab() {
     setSelectedFile(file);
   };
 
-  const formatFileSize = (bytes: number) => {
-    return (bytes / (1024 * 1024)).toFixed(2) + " MB";
-  };
+  // const formatFileSize = (bytes: number) => {
+  //   return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+  // };
 
   //  اگه نتیجه نمایش داده شده، فقط AudioTextPlayer نشون بده
   if (showResult && transcriptionData) {

@@ -5,7 +5,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useArchiveAPI } from "../components/hooks/useArchiveAPI";
 
 //! Types Imports
-import type { IArchiveFile, ITimedText } from "../types/APIType";
+import type { IArchiveFile } from "../types/APIType";
 
 //! Redux
 import { useAppSelector, useAppDispatch } from "../components/hooks/redux";
@@ -15,17 +15,17 @@ import {
   setCurrentPage,
   setTotalPages,
   setExpandedRow,
-  setFileTextMode,
-  setFileCurrentTime,
+  // setFileTextMode,
+  // setFileCurrentTime,
   setFileDeleteLoading,
   setFileCopySuccess,
   removeFile,
   selectFiles,
-  selectTotalCount,
+  // selectTotalCount,
   selectCurrentPage,
   selectTotalPages,
   selectExpandedRow,
-  selectFileState,
+  // selectFileState,
 } from "../store/slices/archiveSlice";
 
 //! Icons
@@ -48,7 +48,7 @@ function Archive() {
   // ✅ Redux hooks
   const dispatch = useAppDispatch();
   const reduxFiles = useAppSelector(selectFiles);
-  const reduxTotalCount = useAppSelector(selectTotalCount);
+  // const reduxTotalCount = useAppSelector(selectTotalCount);
   const reduxCurrentPage = useAppSelector(selectCurrentPage);
   const reduxTotalPages = useAppSelector(selectTotalPages);
   const expandedRow = useAppSelector(selectExpandedRow);
@@ -62,7 +62,7 @@ function Archive() {
     currentPage,
     totalPages,
     fetchFiles,
-    deleteFile,
+    // deleteFile,
     refreshFiles,
   } = useArchiveAPI(8);
 
@@ -75,7 +75,12 @@ function Archive() {
   }, [files, totalCount, currentPage, totalPages, dispatch]);
 
   //! States (فقط searchTerm باقی مونده)
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm
+    , setSearchTerm
+  ] = useState("");
+
+  console.log(setSearchTerm);
+  
 
   //! Refs
   const tableBodyRef = useRef<HTMLDivElement>(null);

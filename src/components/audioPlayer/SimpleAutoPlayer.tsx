@@ -21,8 +21,8 @@ interface ISimpleAudioPlayerProps {
 
 function SimpleAudioPlayer({
   audioUrl = "",
-  duration,
-  timedText = [],
+  // duration,
+  // timedText = [],
   onTimeUpdate,
 }: ISimpleAudioPlayerProps) {
   //! States

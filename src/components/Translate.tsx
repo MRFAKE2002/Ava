@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
 //! Icons
-import { FaUser, FaSignOutAlt } from "react-icons/fa";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa6";
 
 //! Types
