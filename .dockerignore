@@ -1,0 +1,43 @@
+node_modules
+
+# Build files
+dist
+build
+.next
+
+# Environment files - اطلاعات حساس
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Git files
+.git
+.gitignore
+
+# IDE files
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files خودشون
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+*.md
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Cache
+.cache
+.npm
