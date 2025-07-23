@@ -30,7 +30,7 @@ interface IAudioTextPlayerProps {
   transcriptionData: ITranscriptionData | null;
   originalAudioUrl?: string;
   onNewRecording?: () => void;
-  theme?: "record" | "file" | "link"; // ✅ نوع تم برای رنگ‌بندی
+  theme?: "record" | "file" | "link"; //  نوع تم برای رنگ‌بندی
 }
 
 //! Theme Configuration
@@ -148,7 +148,7 @@ function AudioTextPlayer({
 
   // تبدیل segments به فرمت قابل استفاده با زمان‌های عددی
   const processedSegments =
-    transcriptionData?.segments.map((segment) => ({
+    transcriptionData?.segments?.map((segment) => ({
       startTime: parseTimeToSeconds(segment.start),
       endTime: parseTimeToSeconds(segment.end),
       text: segment.text,
@@ -238,7 +238,7 @@ function AudioTextPlayer({
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    console.log(`✅ فایل متن (${textSize}) دانلود شد`);
+    console.log(` فایل متن (${textSize}) دانلود شد`);
   };
 
   /**
@@ -262,7 +262,7 @@ function AudioTextPlayer({
       await navigator.clipboard.writeText(textToCopy);
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
-      console.log("✅ متن کپی شد");
+      console.log(" متن کپی شد");
     } catch (error) {
       console.error("❌ خطا در کپی:", error);
 
@@ -276,7 +276,7 @@ function AudioTextPlayer({
 
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
-      console.log("✅ متن کپی شد (روش جایگزین)");
+      console.log(" متن کپی شد (روش جایگزین)");
     }
   };
 
@@ -295,7 +295,7 @@ function AudioTextPlayer({
     const handleLoadedMetadata = () => {
       setTotalDuration(Math.floor(audio.duration));
       setAudioError("");
-      console.log("✅ Audio loaded successfully");
+      console.log(" Audio loaded successfully");
     };
 
     // تابع پایان پخش
@@ -491,13 +491,13 @@ function AudioTextPlayer({
       {/* نمایش پیام موفقیت کپی */}
       {copySuccess && (
         <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-fade-in">
-          ✅ متن با موفقیت کپی شد
+          متن با موفقیت کپی شد
         </div>
       )}
 
       {/* نمایش خطای صوتی */}
       {audioError && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-lg text-sm">
+        <div className="fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-lg text-sm">
           ❌ {audioError}
         </div>
       )}
@@ -581,9 +581,7 @@ function AudioTextPlayer({
                   key={index}
                   onClick={() => handleSegmentClick(segment.startTime)}
                   className={`rounded-full px-4 py-3 transition-all duration-300 cursor-pointer ${
-                      index % 2 === 0
-                      ? "bg-gray-100"
-                      : ""
+                    index % 2 === 0 ? "bg-gray-100" : ""
                   }`}
                 >
                   <div className="flex items-start gap-4">
@@ -673,9 +671,10 @@ function AudioTextPlayer({
           </div>
 
           {/* نوار پیشرفت */}
-          <div className="flex-1 flex items-center gap-3" 
-                style={{ direction: "ltr" }}
-                >
+          <div
+            className="flex-1 flex items-center gap-3"
+            style={{ direction: "ltr" }}
+          >
             <span className="text-sm text-gray-500 min-w-12">
               {formatTime(currentTime)}
             </span>
@@ -696,7 +695,6 @@ function AudioTextPlayer({
                 style={{ left: `${progressPercentage}%` }}
               ></div>
             </div>
-
           </div>
 
           {/* Control Buttons */}
