@@ -10,6 +10,7 @@ import { FiLink } from "react-icons/fi";
 import RecordTab from "./UploadTabs/RecordTab";
 import UploadTab from "./UploadTabs/FileTab";
 import TextTab from "./UploadTabs/LinkTab";
+import Translate from "./Translate";
 
 function Upload() {
   //! States
@@ -103,6 +104,15 @@ function Upload() {
         {activeTab === "record" && <RecordTab />}
         {activeTab === "file" && <UploadTab />}
         {activeTab === "link" && <TextTab />}
+      </div>
+
+      <div className="mt-2 w-38 left-12 absolute flex items-center">
+        <div className="">
+          <p className="w-20">زبان گفتار :</p>
+        </div>
+        <div>
+          <Translate />
+        </div>
       </div>
     </div>
   );
